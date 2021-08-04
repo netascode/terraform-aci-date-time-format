@@ -14,35 +14,35 @@ terraform {
 module "main" {
   source = "../.."
 
-  name        = "ABC"
-  alias       = "ALIAS"
-  description = "DESCR"
+  display_format = "utc"
+  timezone       = "p120_Europe-Vienna"
+  show_offset    = false
 }
 
-data "aci_rest" "fvTenant" {
-  dn = "uni/tn-ABC"
+data "aci_rest" "datetimeFormat" {
+  dn = "uni/fabric/format-default"
 
   depends_on = [module.main]
 }
 
-resource "test_assertions" "fvTenant" {
-  component = "fvTenant"
+resource "test_assertions" "datetimeFormat" {
+  component = "datetimeFormat"
 
-  equal "name" {
-    description = "name"
-    got         = data.aci_rest.fvTenant.content.name
-    want        = "ABC"
+  equal "displayFormat" {
+    description = "displayFormat"
+    got         = data.aci_rest.datetimeFormat.content.displayFormat
+    want        = "utc"
   }
 
-  equal "nameAlias" {
-    description = "nameAlias"
-    got         = data.aci_rest.fvTenant.content.nameAlias
-    want        = "ALIAS"
+  equal "tz" {
+    description = "tz"
+    got         = data.aci_rest.datetimeFormat.content.tz
+    want        = "p120_Europe-Vienna"
   }
 
-  equal "descr" {
-    description = "descr"
-    got         = data.aci_rest.fvTenant.content.descr
-    want        = "DESCR"
+  equal "showOffset" {
+    description = "showOffset"
+    got         = data.aci_rest.datetimeFormat.content.showOffset
+    want        = "disabled"
   }
 }

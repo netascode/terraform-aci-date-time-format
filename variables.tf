@@ -1,31 +1,22 @@
-variable "name" {
-  description = "Tenant name."
+variable "display_format" {
+  description = "Display format. Choices: `local`, `utc`."
   type        = string
+  default     = "local"
 
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_.-]{0,64}$", var.name))
-    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 64."
+    condition     = contains(["local", "utc"], var.display_format)
+    error_message = "Valid values are `local` or `utc`."
   }
 }
 
-variable "alias" {
-  description = "Tenant alias."
+variable "timezone" {
+  description = "Timezone. Format: `p0_UTC`. See: https://pubhub.devnetcloud.com/media/apic-mim-ref-501/docs/MO-datetimeFormat.html#tz."
   type        = string
-  default     = ""
-
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9_.-]{0,64}$", var.alias))
-    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `_`, `.`, `-`. Maximum characters: 64."
-  }
+  default     = "p0_UTC"
 }
 
-variable "description" {
-  description = "Tenant description."
-  type        = string
-  default     = ""
-
-  validation {
-    condition     = can(regex("^[a-zA-Z0-9\\!#$%()*,-./:;@ _{|}~?&+]{0,128}$", var.description))
-    error_message = "Allowed characters: `a`-`z`, `A`-`Z`, `0`-`9`, `\\`, `!`, `#`, `$`, `%`, `(`, `)`, `*`, `,`, `-`, `.`, `/`, `:`, `;`, `@`, ` `, `_`, `{`, `|`, }`, `~`, `?`, `&`, `+`. Maximum characters: 128."
-  }
+variable "show_offset" {
+  description = "Show offset."
+  type        = bool
+  default     = true
 }

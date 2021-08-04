@@ -3,14 +3,14 @@ version: '>= 0.14.0'
 formatter: markdown table
 
 content: |-
-  [![Tests](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml)
+  [![Tests](https://github.com/netascode/terraform-aci-date-time-format/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-date-time-format/actions/workflows/test.yml)
 
-  # Terraform ACI Scaffolding Module
+  # Terraform ACI Date Time Format Module
 
-  Description
+  Manages ACI Date Time Format
 
   Location in GUI:
-  `Tenants` » `XXX`
+  `System` » `System Settings` » `Date and Time`
 
   ## Examples
 

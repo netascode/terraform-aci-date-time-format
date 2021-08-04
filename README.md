@@ -1,22 +1,22 @@
 <!-- BEGIN_TF_DOCS -->
-[![Tests](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-scaffolding/actions/workflows/test.yml)
+[![Tests](https://github.com/netascode/terraform-aci-date-time-format/actions/workflows/test.yml/badge.svg)](https://github.com/netascode/terraform-aci-date-time-format/actions/workflows/test.yml)
 
-# Terraform ACI Scaffolding Module
+# Terraform ACI Date Time Format Module
 
-Description
+Manages ACI Date Time Format
 
 Location in GUI:
-`Tenants` » `XXX`
+`System` » `System Settings` » `Date and Time`
 
 ## Examples
 
 ```hcl
-module "aci_scaffolding" {
-  source = "netascode/scaffolding/aci"
+module "aci_date_time_format" {
+  source = "netascode/date-time-format/aci"
 
-  name        = "ABC"
-  alias       = "ABC-ALIAS"
-  description = "My Description"
+  display_format = "utc"
+  timezone       = "p120_Europe-Vienna"
+  show_offset    = false
 }
 
 ```
@@ -38,20 +38,19 @@ module "aci_scaffolding" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_name"></a> [name](#input\_name) | Tenant name. | `string` | n/a | yes |
-| <a name="input_alias"></a> [alias](#input\_alias) | Tenant alias. | `string` | `""` | no |
-| <a name="input_description"></a> [description](#input\_description) | Tenant description. | `string` | `""` | no |
+| <a name="input_display_format"></a> [display\_format](#input\_display\_format) | Display format. Choices: `local`, `utc`. | `string` | `"local"` | no |
+| <a name="input_timezone"></a> [timezone](#input\_timezone) | Timezone. Format: `p0_UTC`. See: https://pubhub.devnetcloud.com/media/apic-mim-ref-501/docs/MO-datetimeFormat.html#tz. | `string` | `"p0_UTC"` | no |
+| <a name="input_show_offset"></a> [show\_offset](#input\_show\_offset) | Show offset. | `bool` | `true` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `fvTenant` object. |
-| <a name="output_name"></a> [name](#output\_name) | Tenant name. |
+| <a name="output_dn"></a> [dn](#output\_dn) | Distinguished name of `datetimeFormat` object. |
 
 ## Resources
 
 | Name | Type |
 |------|------|
-| [aci_rest.fvTenant](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
+| [aci_rest.datetimeFormat](https://registry.terraform.io/providers/netascode/aci/latest/docs/resources/rest) | resource |
 <!-- END_TF_DOCS -->

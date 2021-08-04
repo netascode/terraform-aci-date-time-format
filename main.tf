@@ -1,9 +1,9 @@
-resource "aci_rest" "fvTenant" {
-  dn         = "uni/tn-${var.name}"
-  class_name = "fvTenant"
+resource "aci_rest" "datetimeFormat" {
+  dn         = "uni/fabric/format-default"
+  class_name = "datetimeFormat"
   content = {
-    name      = var.name
-    nameAlias = var.alias
-    descr     = var.description
+    displayFormat = var.display_format
+    tz            = var.timezone
+    showOffset    = var.show_offset == true ? "enabled" : "disabled"
   }
 }
