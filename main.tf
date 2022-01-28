@@ -1,4 +1,4 @@
-resource "aci_rest" "datetimeFormat" {
+resource "aci_rest_managed" "datetimeFormat" {
   dn         = "uni/fabric/format-default"
   class_name = "datetimeFormat"
   content = {

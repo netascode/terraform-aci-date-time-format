@@ -5,8 +5,8 @@ terraform {
     }
 
     aci = {
-      source  = "netascode/aci"
-      version = ">=0.2.0"
+      source  = "CiscoDevNet/aci"
+      version = ">=2.0.0"
     }
   }
 }
@@ -19,7 +19,7 @@ module "main" {
   show_offset    = false
 }
 
-data "aci_rest" "datetimeFormat" {
+data "aci_rest_managed" "datetimeFormat" {
   dn = "uni/fabric/format-default"
 
   depends_on = [module.main]
@@ -30,19 +30,19 @@ resource "test_assertions" "datetimeFormat" {
 
   equal "displayFormat" {
     description = "displayFormat"
-    got         = data.aci_rest.datetimeFormat.content.displayFormat
+    got         = data.aci_rest_managed.datetimeFormat.content.displayFormat
     want        = "utc"
   }
 
   equal "tz" {
     description = "tz"
-    got         = data.aci_rest.datetimeFormat.content.tz
+    got         = data.aci_rest_managed.datetimeFormat.content.tz
     want        = "p120_Europe-Vienna"
   }
 
   equal "showOffset" {
     description = "showOffset"
-    got         = data.aci_rest.datetimeFormat.content.showOffset
+    got         = data.aci_rest_managed.datetimeFormat.content.showOffset
     want        = "disabled"
   }
 }
